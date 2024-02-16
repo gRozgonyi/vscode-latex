@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.fls": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.synctex.gz": true,
+        "**/*.out": true,
+        "**/*.thm": true,
+        // Add any other patterns you want to hide
+    }
+}

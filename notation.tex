@@ -1,0 +1,35 @@
+% vectors
+\renewcommand{\vec}[1]{{\boldsymbol{{#1}}}}
+\newcommand{\mat}[1]{{\boldsymbol{{#1}}}}
+
+%%% various color definitions
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+\newcommand{\blue}[1]{{\color{blue}#1}}
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\green}[1]{{\color{darkgreen}#1}}
+\newcommand{\orange}[1]{{\color{orange}#1}}
+\newcommand{\magenta}[1]{{\color{magenta}#1}}
+\newcommand{\cyan}[1]{{\color{cyan}#1}}
+
+% redefine emph to be bold blue
+\renewcommand{\emph}[1]{\blue{\bf{#1}}}
+
+% red circle around a character
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw=red,inner sep=0.5pt] (char) {#1};}}
+% blue square around a character
+\newcommand*\squared[1]{\tikz[baseline=(char.base)]{
+            \node[shape=rectangle,draw=blue,inner sep=3pt] (char) {#1};}}
+% shield symbol
+\newcommand\shield{
+    \tikz [baseline] \draw[line width=0.15ex] (0,1.3ex) 
+    -- (0,0.65ex) 
+    arc [radius=0.5ex, start angle=-180, end angle=0] 
+    -- (1ex,1.3ex) 
+    -- cycle;
+}
+
+% real and imaginary parts
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}

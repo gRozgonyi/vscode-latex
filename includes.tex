@@ -1,0 +1,284 @@
+%-------------------------------------------------------------------------------
+% PACKAGES
+%-------------------------------------------------------------------------------
+
+% checks if compiling with XeTeX
+\usepackage{ifxetex}
+
+% for creating graphics programmatically
+\usepackage{tikz}
+
+% tikz libraries for path morphing and arrow tips
+\usetikzlibrary{decorations.pathmorphing, arrows.meta}
+
+% for placing text boxes at absolute positions
+\usepackage{textpos}
+
+% for bibliographies and citations
+\usepackage{natbib}
+
+% settings for page dimensions and margins, set in main document
+% \usepackage[a4paper,hmargin=2.8cm,vmargin=2.0cm,includeheadfoot]{geometry}
+
+% checks if compiling with XeTeX (duplicate)
+\usepackage{ifxetex}
+
+% for stacking objects vertically
+\usepackage{stackengine}
+
+% for advanced table formatting
+\usepackage{tabularx,longtable,multirow,subfigure,caption}%hangcaption
+
+% for customizing label formats
+\usepackage{fncylab}
+
+% for customizing headers and footers
+\usepackage{fancyhdr}
+
+% for colored text and backgrounds
+\usepackage{color}
+
+% for consistent unit spacing and styling
+\usepackage[tight,ugly]{units}
+
+% for proper URL formatting
+\usepackage{url}
+
+% for improved float (figure/table) positioning
+\usepackage{float}
+
+% for multilingual support, here for English
+\usepackage[english]{babel}
+
+% for advanced math formatting
+\usepackage{amsmath}
+
+% for including and manipulating graphics
+\usepackage{graphicx}
+
+% for creating to-do notes with color options
+\usepackage[colorinlistoftodos]{todonotes}
+
+% for double stroke fonts, often in math
+\usepackage{dsfont}
+
+% auto-converts .eps graphics to .pdf
+\usepackage{epstopdf}
+
+% for adding back-references in bibliographies
+\usepackage{backref}
+
+% for additional array and table options
+\usepackage{array}
+
+% for additional LaTeX symbols
+\usepackage{latexsym}
+
+% for programming tools and macro support
+\usepackage{etoolbox}
+
+% for referencing by name instead of number
+\usepackage{nameref}
+
+% for "canceling" terms in math expressions
+\usepackage{cancel}
+
+% for customizing the enumerate list environment
+\usepackage{enumerate}
+
+% for creating colored text boxes
+\usepackage{tcolorbox}
+
+% for defining theorem-like environments
+\usepackage{ntheorem}
+
+% for python code formatting
+\usepackage{listings}
+
+%-------------------------------------------------------------------------------
+% PDF & HYPERREF SETUP
+%-------------------------------------------------------------------------------
+
+\ifxetex
+% \usepackage{fontspec}
+% \setmainfont[Scale=.8]{OpenDyslexic-Regular} % set font style
+\else
+\usepackage[pdftex,pagebackref,hypertexnames=false,colorlinks]{hyperref} % provide links in pdf
+\hypersetup{pdftitle={},
+  pdfsubject={}, 
+  pdfauthor={\reportauthor},
+  pdfkeywords={}, 
+  pdfstartview=FitH,
+  pdfpagemode={UseOutlines},% None, FullScreen, UseOutlines
+  bookmarksnumbered=true, bookmarksopen=true, colorlinks,
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=black}
+\usepackage[all]{hypcap}
+\fi
+
+%-------------------------------------------------------------------------------
+% THEOREM SETUP
+%-------------------------------------------------------------------------------
+
+\theoremstyle{break}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem*{proposition}{Proposition}
+
+%-------------------------------------------------------------------------------
+% PARAGRAPH BREAKS
+%-------------------------------------------------------------------------------
+
+\setlength{\parindent}{0em}  % indentation of paragraph
+
+\setlength{\parskip}{1.5ex plus 0.5ex minus 0.5ex} % spacing between paragraphs
+
+%-------------------------------------------------------------------------------
+% HEADER & FOOTER
+%-------------------------------------------------------------------------------
+
+% callable current section name in small caps
+\makeatletter
+\newcommand*{\currentname}{\thesection. \textsc{\@currentlabelname}}
+\makeatother
+
+\pagestyle{fancy}
+
+\fancyhf{} % clear all header and footer fields
+
+\fancyhead[L]{\myheaderleft}
+\fancyhead[R]{\myheaderright}
+\fancyhead[C]{\myheadercenter}
+
+\fancyfoot[ER,OL]{\thepage}
+
+\fancyfoot[OC,EC]{} % center footer
+
+\renewcommand{\headrulewidth}{0.1pt} % under the header
+
+\renewcommand{\footrulewidth}{0.1pt} % above the footer
+
+% Define commands for header content
+\newcommand{\myheaderleft}{} % default value
+\newcommand{\myheaderright}{}
+\newcommand{\myheadercenter}{\currentname}
+
+%-------------------------------------------------------------------------------
+% FIGURE & TABLE CAPTIONS
+%-------------------------------------------------------------------------------
+
+\captionsetup{margin=6pt,font=small,labelfont=bf}
+
+%-------------------------------------------------------------------------------
+% CHAPTER HEADINGS
+%-------------------------------------------------------------------------------
+
+\def\@makechapterhead#1{%
+  \vspace*{10\p@}% vertical space above the chapter title
+  {\parindent \z@ \raggedright % no paragraph indentation and text to the left
+        % add 'Chapter' and its number in uppercase
+        {\Large \MakeUppercase{\@chapapp} \space \thechapter}
+        \\ % line break
+        \hrulefill % add a horizontal line
+        \par\nobreak % new paragraph without allowing a page break
+    \interlinepenalty\@M % penalty discourage page breaks within a line
+    \Huge \bfseries % font size huge and bold
+    % print the chapter number and title, then prevents a page break
+    \thechapter \space\space #1\par\nobreak
+    \vskip 30\p@ % vertical space after the chapter title
+  }
+}
+
+% Definition of the command for chapter headings without numbering (e.g., \chapter*)
+\def\@makeschapterhead#1{%
+  \vspace*{10\p@} % vertical space above the chapter title
+  {\parindent \z@ \raggedright % no paragraph indentation and text to the left
+    \interlinepenalty\@M % discourage page breaks within a line
+    \Huge \bfseries % font size huge and bold
+    % print the chapter number and title, then prevents a page break
+    #1\par\nobreak
+    \vskip 30\p@ % vertical space after the chapter title
+  }
+}
+
+%-------------------------------------------------------------------------------
+% BOXIT ENVIRRONENT
+%-------------------------------------------------------------------------------
+
+% Define the beginning of the boxit environment
+\def\Beginboxit
+   {\par % new paragraph
+    \vbox\bgroup % begin vertical box and a group to contain the box
+	   \hrule % horizontal line at the top of the box
+	   \hbox\bgroup % begin horizontal box to contain the content
+		  \vrule \kern1.2pt % vertical line on the left small space
+		  \vbox\bgroup\kern1.2pt % start another box for content, small space
+   }
+
+% Define the end of the boxit environment
+\def\Endboxit{%
+			      \kern1.2pt % small space at the end of the content
+		       \egroup % end inner vertical box
+		  \kern1.2pt\vrule % small space and vertical line on the right
+		\egroup % end the horizontal box
+	   \hrule % horizontal line at the bottom of the box
+	 \egroup % end the outermost vertical box
+   }	
+
+% environment 'boxit' using Beginboxit and Endboxit
+\newenvironment{boxit}{\Beginboxit}{\Endboxit}
+
+% 'boxit*' stretches horizontally to fill the page width
+\newenvironment{boxit*}{\Beginboxit\hbox to\hsize{}}{\Endboxit}
+
+%-------------------------------------------------------------------------------
+% EQUATIONS
+%-------------------------------------------------------------------------------
+
+\allowdisplaybreaks % allow page breaks in equations
+
+\setlength{\jot}{8pt} % spacing between equations
+
+%-------------------------------------------------------------------------------
+% PYTHON CODE FORMATTING
+%-------------------------------------------------------------------------------
+
+% Define custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Setup the style for Python
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{
+  breaklines=true,
+  style=pythonstyle
+}
+
+\renewcommand{\lstlistingname}{Code Snippet}
+
+% use this to include a Python script from a file
+% \lstinputlisting[language=Python, caption=Python script from file]{script.py}
