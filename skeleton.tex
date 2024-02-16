@@ -65,11 +65,160 @@
 % Main Document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section*{Basic LaTeX functionalities}
+
 This document is as plain as it gets. But you do have page numbering.
 
 Here's an equation:
 \begin{equation}
     \int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+    \label{eq:gaussian_integral}
+\end{equation}
+
+And here's a table:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+        $x$ & $f(x)$ \\
+        \hline
+        1 & 2 \\
+        2 & 4 \\
+        3 & 6 \\
+        4 & 8 \\
+    \end{tabular}
+    \caption{A simple table}
+    \label{tab:simple_table}
+\end{table}
+Notice that it's positioned to be exactly here using the \texttt{[H]} in the
+beginning line. Otherwise, it would float to the top of the page (or the next
+suitable page).
+
+The code for the Imperial logo comes here, but it floats to the top of the page.
+Notice that it's set to be 60\% of the width of the writable page 
+(\texttt{[width=0.6\textbackslash textwidth]}).
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figures/imperial.pdf}
+    \caption{Imperial College London logo}
+    \label{fig:imperial_logo}
+\end{figure}
+
+I can reference each of these elements using the \texttt{label} command. For
+example, I can reference the table as Table \ref{tab:simple_table}, the equation
+as Equation \ref{eq:gaussian_integral}, and the figure as Figure
+\ref{fig:imperial_logo}.
+
+If I want to include a multiline equation, I can use the \texttt{align} 
+environment:
+\begin{align}
+    1+1+1+1+1&=2+1+1+1 \nonumber\\
+    &=3+1+1 \\
+    &=4+1 \nonumber\\
+    &=5
+\end{align}
+I put \texttt{\textbackslash nonumber} in the lines I don't want to be numbered.
+
+To include code, I can use the \texttt{lstlisting} environment. But this can
+go into a new \texttt{\textbackslash subsection}, that I decide to number:
+
+\subsection{Including code}
+
+Wait! The number is all weird. I'd prefer it to be \texttt{1.1} instead of
+\texttt{0.1}. Let's fix this by telling LaTeX that we are already in the first
+section, using the \texttt{stepcounter} command.
+\stepcounter{section}
+But we also want to reset the subsection counter to 0. We can do this using the
+\texttt{setcounter} command.
+\setcounter{subsection}{0}
+Let's see if this worked.
+
+\subsection{Including code}
+
+Yay! Onto displaying code.
+
+\begin{lstlisting}[language=Python, caption=Python example]
+# This is a comment
+import numpy as np
+
+def inc(x):
+    return x + 1
+
+print(inc(4))
+\end{lstlisting}
+This can be used to include code from any language. I can include C code:
+\begin{lstlisting}[language=C]
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, world!" << std::endl;
+    return 0;
+}
+\end{lstlisting}
+and (for whatever reason) I even removed the caption!
+
+I can also include code from a file:
+\lstinputlisting[language=Python, caption=Python example from file]{
+    ./code/example.py
+}
+
+Now that's done, let's draw something using TikZ.
+
+\subsection{Drawing with TikZ}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+
+        \draw[fill=yellow] (0,0) circle (1);
+        \draw (0,0) circle (1);
+        \draw (-0.5,0.5) circle (0.1);
+        \draw (0.5,0.5) circle (0.1);
+        \draw (-0.5,-0.5) -- (0.5,-0.5);
+
+    \end{tikzpicture}
+    \caption{A simple vector graphic face.}
+    \label{fig:tikz_2d}
+\end{figure}
+
+But maaybe you generated some data and saved it as a \texttt{.csv} file. You can
+include a plot of this too!
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            title={Data Plot},
+            xlabel={$x$},
+            ylabel={$f(x)$},
+            legend pos=north west,
+            ymajorgrids=true,
+            grid style=dashed,
+        ]
+        \addplot table [x=x, y=y, col sep=comma] {./code/data.csv};
+        \addlegendentry{Data}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{A simple plot of some data.}
+    \label{fig:tikz_plot}
+\end{figure}
+
+Finally, some useful LaTeX commands and maths stuff, like matrices:
+\begin{itemize}
+    \item \texttt{\textbackslash textbf\{bold\}}: \textbf{bold}
+    \item \texttt{\textbackslash textit\{italic\}}: \textit{italic}
+\end{itemize}
+
+\begin{equation}
+    \begin{bmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+        7 & 8 & 9
+    \end{bmatrix}=
+    \begin{pmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+        7 & 8 & 9
+    \end{pmatrix}
 \end{equation}
 
 \end{document}
