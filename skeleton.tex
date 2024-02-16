@@ -95,7 +95,7 @@ suitable page).
 
 The code for the Imperial logo comes here, but it floats to the top of the page.
 Notice that it's set to be 60\% of the width of the writable page 
-(\texttt{[width=0.6\textbackslash textwidth]}).
+(\texttt{[width=0.6 textwidth]}).
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{./figures/imperial.pdf}
@@ -116,10 +116,10 @@ environment:
     &=4+1 \nonumber\\
     &=5
 \end{align}
-I put \texttt{\textbackslash nonumber} in the lines I don't want to be numbered.
+I put \texttt{nonumber} in the lines I don't want to be numbered.
 
 To include code, I can use the \texttt{lstlisting} environment. But this can
-go into a new \texttt{\textbackslash subsection}, that I decide to number:
+go into a new \texttt{subsection}, that I decide to number:
 
 \subsection{Including code}
 
@@ -204,8 +204,11 @@ include a plot of this too!
 
 Finally, some useful LaTeX commands and maths stuff, like matrices:
 \begin{itemize}
-    \item \texttt{\textbackslash textbf\{bold\}}: \textbf{bold}
-    \item \texttt{\textbackslash textit\{italic\}}: \textit{italic}
+    \item \texttt{textbf}: \textbf{bold}
+    \item \texttt{textit}: \textit{italic}
+    \item \texttt{large}: {\large{larger text!}}
+    \item \texttt{huge}: {\huge{huge text!}} (always enclose
+    these in curly braces)
 \end{itemize}
 
 \begin{equation}
