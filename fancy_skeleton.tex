@@ -41,21 +41,33 @@
 
 \begin{document}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Title Page (can comment out if not needed)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------------------
+% Title Page & TOC (can comment out if not needed)
+%-------------------------------------------------------------------------------
 
+% title page
 \input{titlepage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Main Document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% table of contents (with header and footer removed)
+\thispagestyle{empty}
+\tableofcontents
+\setcounter{page}{0}
+\clearpage
 
-This document is as plain as it gets. But you do have page numbering.
+%-------------------------------------------------------------------------------
+% Main Document
+%-------------------------------------------------------------------------------
+
+% this is the name of the section, but it's not numbered because of the *
+\section*{Introduction}
+% this just counts sections even if they're not numbered and adds them to TOC
+\sections{Introduction}
+
+This document has a fancy titlepage and also fancy headers and footers.
 
 Here's an equation:
-\begin{equation}
-    \int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
-\end{equation}
+\begin{align}
+    \int_{0}^{1} x^2 \, dx = \frac{1}{3}
+\end{align}
 
 \end{document}

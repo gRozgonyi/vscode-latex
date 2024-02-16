@@ -59,8 +59,8 @@
 % for creating to-do notes with color options
 \usepackage[colorinlistoftodos]{todonotes}
 
-% for double stroke fonts, often in math
-\usepackage{dsfont}
+% for double stroke maths symbols
+\usepackage{amssymb}
 
 % auto-converts .eps graphics to .pdf
 \usepackage{epstopdf}
@@ -143,7 +143,13 @@
 
 % callable current section name in small caps
 \makeatletter
-\newcommand*{\currentname}{\thesection. \textsc{\@currentlabelname}}
+\newcommand*{\currentname}{%
+\ifnum\value{subsection}=0
+  \thesection. \textsc{\@currentlabelname} % Only section
+\else
+  \thesubsection. \textsc{\@currentlabelname} % Subsection
+\fi
+}
 \makeatother
 
 \pagestyle{fancy}
@@ -282,3 +288,20 @@
 
 % use this to include a Python script from a file
 % \lstinputlisting[language=Python, caption=Python script from file]{script.py}
+
+%-------------------------------------------------------------------------------
+% SECTION COUNTING FOR STARRED VARIANTS
+%-------------------------------------------------------------------------------
+
+\newcommand{\sections}[1]{
+  \stepcounter{section}
+  \addcontentsline{toc}{section}{#1}
+}
+\newcommand{\subsections}[1]{
+  \stepcounter{subsection}
+  \addcontentsline{toc}{subsection}{#1}
+}
+\newcommand{\subsubsections}[1]{
+  \stepcounter{subsubsection}
+  \addcontentsline{toc}{subsubsection}{#1}
+}
