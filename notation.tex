@@ -17,7 +17,7 @@
 
 % red circle around a character
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,draw=red,inner sep=0.5pt] (char) {#1};}}
+            \node[shape=circle,draw=red,inner sep=1.3pt] (char) {#1};}}
 % blue square around a character
 \newcommand*\squared[1]{\tikz[baseline=(char.base)]{
             \node[shape=rectangle,draw=blue,inner sep=3pt] (char) {#1};}}
@@ -33,3 +33,27 @@
 % real and imaginary parts
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
+
+
+% partial and total derivatives
+\NewDocumentCommand{\pd}{omm}{
+    \IfValueTF{#1}{
+        \frac{\partial^{#1} #2}{\partial #3^{#1}}
+    }{
+        \frac{\partial #2}{\partial #3}
+    }
+}
+
+\NewDocumentCommand{\td}{omm}{
+    \IfValueTF{#1}{
+        \frac{d^{#1} #2}{d #3^{#1}}
+    }{
+        \frac{d #2}{d #3}
+    }
+}
+
+% argmin and argmax
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
+\newcommand{\etal}{\textit{et al. }}

@@ -6,6 +6,10 @@
         "**/*.synctex.gz": true,
         "**/*.out": true,
         "**/*.thm": true,
+        "**/*.bbl": true,
+        "**/*.blg": true,
+        "**/*.brf": true,
+        "**/*.log": true
         // Add any other patterns you want to hide
     }
 }

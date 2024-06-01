@@ -9,12 +9,17 @@
 \usepackage{tikz}
 
 % tikz libraries for path morphing and arrow tips
-\usetikzlibrary{decorations.pathmorphing, arrows.meta}
+\usetikzlibrary{
+  decorations.pathmorphing, 
+  arrows.meta, 
+  decorations.markings
+}
 
 % for placing text boxes at absolute positions
 \usepackage{textpos}
 
 % for bibliographies and citations
+\usepackage[numbers]{natbib}
 \usepackage{natbib}
 
 % settings for page dimensions and margins, set in main document
@@ -90,7 +95,7 @@
 \usepackage{tcolorbox}
 
 % for defining theorem-like environments
-\usepackage{ntheorem}
+\usepackage[standard]{ntheorem}
 
 % for python code formatting
 \usepackage{listings}
@@ -98,6 +103,22 @@
 % for plotting
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
+% for tables
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+
+% for pseudocode
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% for customising enumerate headers
+\usepackage{enumitem}
+
+% for better arrows (and possibly else)
+\usepackage{mathtools}
+
+% filler text
+\usepackage{lipsum}
 
 %-------------------------------------------------------------------------------
 % PDF & HYPERREF SETUP
@@ -121,17 +142,6 @@
     urlcolor=black}
 \usepackage[all]{hypcap}
 \fi
-
-%-------------------------------------------------------------------------------
-% THEOREM SETUP
-%-------------------------------------------------------------------------------
-
-\theoremstyle{break}
-\newtheorem{lemma}{Lemma}
-\newtheorem{theorem}{Theorem}
-\newtheorem*{remark}{Remark}
-\newtheorem{definition}{Definition}
-\newtheorem*{proposition}{Proposition}
 
 %-------------------------------------------------------------------------------
 % PARAGRAPH BREAKS
@@ -237,7 +247,7 @@
 		\egroup % end the horizontal box
 	   \hrule % horizontal line at the bottom of the box
 	 \egroup % end the outermost vertical box
-   }	
+   }
 
 % environment 'boxit' using Beginboxit and Endboxit
 \newenvironment{boxit}{\Beginboxit}{\Endboxit}
