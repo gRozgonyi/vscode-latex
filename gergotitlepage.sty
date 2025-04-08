@@ -1,0 +1,173 @@
+% A package that handles the creation and configuration of a title page for a LaTeX document. Designed specifically to be used with the `gergobrief` and `gergofancy` classes.
+
+\ProvidesPackage{gergotitlepage}[2025/04/08 v0.1 Title page for gergobrief and gergofancy classes]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% USER CONFIGURABLE PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\reporttitle}{
+  Redefine title using \texttt{\textbackslash reporttitle}
+}
+\newcommand{\reportauthor}{
+  \texttt{\textbackslash reportauthor}
+}
+\newcommand{\reporttype}{
+  \texttt{\textbackslash reporttype}
+}
+\newcommand{\reportsupervisor}{
+  \texttt{\textbackslash reportsupervisor}
+}
+\newcommand{\reportabstract}{
+  Redefine the abstract using \texttt{\textbackslash renewcommand\{\textbackslash reportabstract\}}. Remove it completely by using \texttt{\textbackslash ReportAbstractfalse} in the preamble. Add default plagiarism statement using \texttt{\textbackslash PlagiarismStatementtrue}.
+
+  The date can be fixed using \texttt{\textbackslash reportdate}.
+}
+\makeatletter
+\newcommand{\reportdate}{
+  \@date
+}
+\makeatother
+\newcommand{\reportemail}{
+  \textbackslash reportemail
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% OPTIONAL ELEMENT LOGIC %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Abstract inclusion
+\newif\ifReportAbstract
+\ReportAbstracttrue
+\newcommand{\printabstract}{%
+  \ifReportAbstract
+    {\vspace{1em}
+    \begin{abstract}
+    \reportabstract
+    \end{abstract}
+    \vfill}
+    \fi
+    {\vfill}
+}
+
+% Plagiarism statement inclusion
+\newif\ifPlagiarismStatement
+\PlagiarismStatementfalse
+\makeatletter
+\newcommand{\printplagiarismstatement}{%
+  \ifPlagiarismStatement
+    {\setlength{\fboxsep}{0.8em}
+      \hfill\fbox{%
+      \parbox{0.86\linewidth}{%
+        \textbf{Plagiarism statement:} This is my own work unless 
+        otherwise stated.\\~\\
+        \hspace*{\fill}\reportauthor\\
+        \hspace*{\fill}\@date
+      }%
+    }\hfill}
+  \fi
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% FANCY TITLE PAGE CONSTRUCTION %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\newcommand{\inputfancytitlepage}{
+  \begin{titlepage}
+
+    \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+    
+    %---------------------------------------------------------------------------
+    %	LOGO SECTION
+    %---------------------------------------------------------------------------
+    
+    \graphicspath{{~/texmf/tex/latex}}
+    \includegraphics[width = 6cm]{./figures/imperial_new}
+    \vspace{2cm}
+    
+    \begin{center} % Center remainder of the page
+    
+    %---------------------------------------------------------------------------
+    %	HEADING SECTIONS
+    %---------------------------------------------------------------------------
+    \textsc{\LARGE \reporttype}\\[1.5cm] 
+    \textsc{\Large Imperial College London}\\[0.5cm] 
+    \textsc{\large Department of Mathematics}\\[0.5cm] 
+    %---------------------------------------------------------------------------
+    %	TITLE SECTION
+    %---------------------------------------------------------------------------
+    
+    \HRule \\[0.4cm]
+    { \huge \bfseries \reporttitle}\\ % Title of your document
+    \HRule \\[1.5cm]
+    \end{center}
+    %---------------------------------------------------------------------------
+    %	AUTHOR SECTION
+    %---------------------------------------------------------------------------
+    
+    \begin{flushleft} \large
+    \textit{Author}\hfill\textit{Supervisor}\\
+    \reportauthor \hfill \reportsupervisor
+    \end{flushleft}
+    
+    \printabstract
+
+    \printplagiarismstatement
+    
+    \vspace{1cm}
+    Date: \reportdate   
+    
+  \end{titlepage}
+
+  \setcounter{page}{1}
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% BRIEFING STYLE TITLE PAGE CONSTRUCTION %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\newcommand{\inputbrieftitlepage}{
+  \begin{titlepage}
+
+    \begin{center}
+      
+      \vspace*{4cm}
+    
+      \Huge
+      \reporttitle
+    
+      \vspace{1cm}
+      \Large
+      \reportauthor
+    
+      % \vspace{0.5cm}
+      % \texttt{\href{mailto:\reportemail}{\reportemail}}
+      % \vspace{2cm}
+    
+    
+      \vspace{0.5cm}
+      \LARGE
+      \textsc{UPDATED \reportdate}
+      \vspace{1.5cm}
+    
+      \large
+      Department of Mathematics\\
+      Imperial College London\\
+      180 Queen's Gate\\
+      London, SW7 2AZ, U.K.\\
+    
+      \vspace{0.5cm}
+      \texttt{\href{mailto:\reportemail}{\reportemail}}
+
+    \end{center}
+        
+    \printabstract
+        
+  \end{titlepage}
+    
+  \setcounter{page}{1}
+}
+\makeatother
