@@ -302,5 +302,5 @@ TSWLatexianTemp*
 
 ## Ignore misc folders
 /ARCHIVE
+/codes
 /tester
-/code
