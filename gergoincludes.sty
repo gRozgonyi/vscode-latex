@@ -65,6 +65,7 @@
 \usepackage{graphicx}
 
 % for creating to-do notes with color options
+\setlength{\marginparwidth}{2cm}
 \usepackage[colorinlistoftodos]{todonotes}
 
 % for double stroke maths symbols
@@ -188,9 +189,13 @@
 \fancyhead[R]{\myheaderright}
 \fancyhead[C]{\myheadercenter}
 
-\fancyfoot[ER,OL]{\thepage}
-
-\fancyfoot[OC,EC]{} % center footer
+\makeatletter
+\if@twoside
+  \fancyfoot[ER,OL]{\thepage}
+\else
+  \fancyfoot[C]{} % center footer
+\fi
+\makeatother
 
 \renewcommand{\headrulewidth}{0.1pt} % under the header
 
@@ -312,9 +317,9 @@
 }
 
 \lstdefinelanguage{JavaScript}{
-  keywords={catch,do,
-    finally,function,in,instanceof,
-    throw,try,var,void,with,await,async,console,Number,Boolean,String,Array,Object,Math,length,Set,Map,size},
+  keywords={do,
+    finally,in,instanceof,constructor,
+    try,var,void,with,console,Number,Boolean,String,Array,Object,Math,length,Set,Map,size,Date,Intl,IntersectionObserver,prototype,__proto__,Promise},
   sensitive=true,
   comment=[l]//, % Comments starting with //
   morecomment=[s]{/*}{*/}, % Block comments /* */
@@ -326,16 +331,18 @@
   identifierstyle=\color{black!60!gray!90},
   stringstyle=\color{orange!40!red!45!yellow},
   commentstyle=\color{gray},
-  morekeywords=[2]{log,trunc,random,warn,error,querySelector,keys,values,entries,has,add,delete,clear,difference,union,intersection,symmetricDifference,isDisjointFrom,isSubsetOf,isSupersetOf,set,get,has,replace,replaceAll,includes,startsWith,endsWith,split,join,toUpperCase,toLowerCase,indexOf,lastIndexOf,slice,padStart,push,dir,call,bind,addEventListenersetTimeout,forEach},
+  morekeywords=[2]{log,trunc,random,warn,error,querySelector,keys,values,entries,has,add,delete,clear,difference,union,intersection,symmetricDifference,isDisjointFrom,isSubsetOf,isSupersetOf,has,replace,replaceAll,includes,startsWith,endsWith,split,join,toUpperCase,toLowerCase,indexOf,lastIndexOf,slice,padStart,push,dir,call,bind,addEventListener,forEach,map,filter,reduce,sort,groupBy,querySelectorAll,toSorted,toReversed,toSpliced,isNaN,isFinite,parseInt,parseFloat,toFixed,NumberFormat,DateTimeFormat,setTimeout,clearTimeout,setInterval,clearInterval,getElementById,getElementsByClassName,getElementsByTagName,createElement,prepend,append,cloneNode,remove,getComputedStyle,setProperty,getAttribute,setAttribute,observe,findLastIndex,unobserve,getFullYear,pop,create,fetch,then,json,resolve,reject,Error,catch,accept,alert,reverse,concat,at,splice,fill},
   morekeywords=[3]{true,false}, % Custom group for true/false
-  morekeywords=[4]{of,typeof,if,else,case,break,switch,default,return,new,for,continue,while,debugger}, % Custom group for typeof
-  morekeywords=[5]{this},
-  morekeywords=[6]{let,const},
+  morekeywords=[4]{of,typeof,if,else,case,break,switch,default,return,new,for,continue,while,debugger,throw,await,async,import,as,from,export}, % Custom group for typeof
+  morekeywords=[5]{this,super},
+  morekeywords=[6]{let,const,function,var,class,get,set,module},
+  morekeywords=[7]{static,extends},
   keywordstyle=[2]\color{green!80!orange!80!black}, % Color for log
   keywordstyle=[3]\color{blue!65!purple}, % Color for true/false
   keywordstyle=[4]\color{red!60!purple!90}, % Color for typeof
   keywordstyle=[5]\color{black!20!gray!90}\itshape, % Color for this
   keywordstyle=[6]\color{teal!20!cyan!80!black}\itshape, % Color for let/const
+  keywordstyle=[7]\color{red!60!purple!90}\itshape, % Color for static
 }
 
 \lstdefinestyle{javascriptstyle}{
@@ -347,7 +354,7 @@
   breaklines=true,                 
   captionpos=b,                    
   keepspaces=true,                 
-  numbers=left,                    
+  numbers=none,                    
   numbersep=5pt,                  
   showspaces=false,                
   showstringspaces=false,
@@ -384,6 +391,7 @@
     {7}{{{\color{blue!65!purple}7}}}{1}%
     {8}{{{\color{blue!65!purple}8}}}{1}%
     {9}{{{\color{blue!65!purple}9}}}{1}%
+    {Infinity}{{{\color{blue!65!purple}Infinity}}}{8}%
 }
 
 \renewcommand{\lstlistingname}{Snippet}
